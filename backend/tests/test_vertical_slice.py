@@ -111,7 +111,7 @@ async def test_scenario_5_blend_group_coordination():
     assert len(joined_session.members) == 2
 
     # 3. Trigger autonomous group coordination
-    coordinated = await blend_coordinator.coordinate_outfits(session.blend_id)
+    coordinated = await blend_coordinator.coordinate_outfits(session.blend_id, force_fixture="fixture")
     assert coordinated.group_cohesion_score >= 90.0
 
     m1_outfit = coordinated.members[0].recommended_outfit

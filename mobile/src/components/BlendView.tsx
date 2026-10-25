@@ -16,19 +16,23 @@ export const BlendView: React.FC<BlendViewProps> = ({
   onCreateNewRoom,
 }) => {
   const [isCoordinating, setIsCoordinating] = useState(false);
+  const [isAddingFriend, setIsAddingFriend] = useState(false);
   const [friendName, setFriendName] = useState('Sneha');
   const [friendBudget, setFriendBudget] = useState('3500');
   const [friendStyle, setFriendStyle] = useState('Indo-Western fusion');
+  const [friendGender, setFriendGender] = useState<'men' | 'women'>('women');
   const [showAddFriend, setShowAddFriend] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleCoordinate = async () => {
     if (!session) return;
+    setErrorMessage(null);
     setIsCoordinating(true);
     try {
       const updated = await coordinateBlend(session.blend_id);
       onRefreshSession(updated);
-    } catch (e) {
-      console.error('Coordination error:', e);
+    } catch (e: any) {
+      setErrorMessage(e?.message || 'Failed to coordinate group outfits.');
     } finally {
       setIsCoordinating(false);
     }
@@ -36,27 +40,44 @@ export const BlendView: React.FC<BlendViewProps> = ({
 
   const handleAddFriend = async () => {
     if (!session) return;
+    const numBudget = parseFloat(friendBudget);
+    if (!friendName.trim()) {
+      setErrorMessage('Friend name is required.');
+      return;
+    }
+    if (isNaN(numBudget) || numBudget < 500) {
+      setErrorMessage('Friend budget must be at least ₹500.');
+      return;
+    }
+
+    setErrorMessage(null);
+    setIsAddingFriend(true);
     try {
       const updated = await joinBlend({
         blend_id: session.blend_id,
-        member_name: friendName,
-        member_budget_inr: parseFloat(friendBudget) || 3500,
-        member_style: friendStyle,
-        member_gender: 'women',
+        member_name: friendName.trim(),
+        member_budget_inr: numBudget,
+        member_style: friendStyle.trim() || 'Smart Casual',
+        member_gender: friendGender,
       });
       onRefreshSession(updated);
       setShowAddFriend(false);
-    } catch (e) {
-      console.error('Failed to join friend:', e);
+      setFriendName('');
+    } catch (e: any) {
+      setErrorMessage(e?.message || 'Failed to add friend to blend room.');
+    } finally {
+      setIsAddingFriend(false);
     }
   };
 
   if (!session) {
     return (
       <View style={styles.emptyContainer}>
+        <Text style={styles.emptyIcon}>👥</Text>
         <Text style={styles.emptyTitle}>Group Styling Studio ("Blend")</Text>
         <Text style={styles.emptySub}>
-          Collaborate with friends to build synchronized outfits for festivals, farewells, weddings, or trips while respecting each person's unique budget and style.
+          Collaborate with friends to build synchronized outfits for festivals, farewells, weddings,
+          or trips while respecting each person's unique budget and personal style.
         </Text>
         <TouchableOpacity style={styles.createButton} onPress={onCreateNewRoom}>
           <Text style={styles.createButtonText}>Initialize Blend Room</Text>
@@ -67,6 +88,16 @@ export const BlendView: React.FC<BlendViewProps> = ({
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      {/* Error Banner */}
+      {errorMessage && (
+        <View style={styles.errorBanner}>
+          <Text style={styles.errorText}>⚠️ {errorMessage}</Text>
+          <TouchableOpacity onPress={() => setErrorMessage(null)}>
+            <Text style={styles.errorDismiss}>Dismiss</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       {/* Blend Room Header Card */}
       <View style={styles.headerCard}>
         <View style={styles.roomBadgeRow}>
@@ -102,12 +133,15 @@ export const BlendView: React.FC<BlendViewProps> = ({
 
         <View style={styles.actionBtnRow}>
           <TouchableOpacity
-            style={styles.coordinateBtn}
+            style={[styles.coordinateBtn, isCoordinating && styles.btnDisabled]}
             onPress={handleCoordinate}
             disabled={isCoordinating}
           >
             {isCoordinating ? (
-              <ActivityIndicator color="#0F1318" size="small" />
+              <View style={styles.loadingRow}>
+                <ActivityIndicator color="#0F1318" size="small" />
+                <Text style={styles.coordinateBtnText}>Harmonizing Outfits...</Text>
+              </View>
             ) : (
               <Text style={styles.coordinateBtnText}>⚡ Coordinate Group Outfits</Text>
             )}
@@ -117,7 +151,9 @@ export const BlendView: React.FC<BlendViewProps> = ({
             style={styles.addFriendBtn}
             onPress={() => setShowAddFriend(!showAddFriend)}
           >
-            <Text style={styles.addFriendBtnText}>+ Add Friend</Text>
+            <Text style={styles.addFriendBtnText}>
+              {showAddFriend ? 'Cancel' : '+ Add Friend'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -130,14 +166,14 @@ export const BlendView: React.FC<BlendViewProps> = ({
             style={styles.input}
             value={friendName}
             onChangeText={setFriendName}
-            placeholder="Friend Name"
+            placeholder="Friend Name (e.g. Sneha)"
             placeholderTextColor="#64748B"
           />
           <TextInput
             style={styles.input}
             value={friendBudget}
             onChangeText={setFriendBudget}
-            placeholder="Personal Budget (₹ INR)"
+            placeholder="Personal Budget (₹ INR, min 500)"
             placeholderTextColor="#64748B"
             keyboardType="numeric"
           />
@@ -148,8 +184,36 @@ export const BlendView: React.FC<BlendViewProps> = ({
             placeholder="Style Preference (e.g. Indo-Western chic)"
             placeholderTextColor="#64748B"
           />
-          <TouchableOpacity style={styles.submitFriendBtn} onPress={handleAddFriend}>
-            <Text style={styles.submitFriendBtnText}>Add Friend to Room</Text>
+
+          <View style={styles.genderSelectRow}>
+            <TouchableOpacity
+              style={[styles.genderSelectBtn, friendGender === 'women' && styles.genderSelectActive]}
+              onPress={() => setFriendGender('women')}
+            >
+              <Text style={[styles.genderSelectText, friendGender === 'women' && styles.genderSelectTextActive]}>
+                Women
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.genderSelectBtn, friendGender === 'men' && styles.genderSelectActive]}
+              onPress={() => setFriendGender('men')}
+            >
+              <Text style={[styles.genderSelectText, friendGender === 'men' && styles.genderSelectTextActive]}>
+                Men
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity
+            style={[styles.submitFriendBtn, isAddingFriend && styles.btnDisabled]}
+            onPress={handleAddFriend}
+            disabled={isAddingFriend}
+          >
+            {isAddingFriend ? (
+              <ActivityIndicator color="#0F1318" size="small" />
+            ) : (
+              <Text style={styles.submitFriendBtnText}>Add Friend to Room</Text>
+            )}
           </TouchableOpacity>
         </View>
       )}
@@ -157,7 +221,7 @@ export const BlendView: React.FC<BlendViewProps> = ({
       {/* Members Outfits */}
       <View style={styles.membersSection}>
         <Text style={styles.membersHeader}>
-          Group Members & Looks ({session.members.length})
+          Group Members & Coordinated Looks ({session.members.length})
         </Text>
 
         {session.members.map((member, idx) => (
@@ -182,9 +246,22 @@ export const BlendView: React.FC<BlendViewProps> = ({
                   <Text style={styles.outfitTotal}>
                     Total: ₹{member.recommended_outfit.total_price_inr.toLocaleString('en-IN')}
                   </Text>
-                  <Text style={styles.outfitStatus}>
-                    {member.recommended_outfit.is_within_budget ? '✓ Within Budget' : '⚠️ Over Budget'}
-                  </Text>
+                  <View
+                    style={[
+                      styles.memberBudgetBadge,
+                      {
+                        backgroundColor: member.recommended_outfit.is_within_budget
+                          ? '#065F46'
+                          : '#991B1B',
+                      },
+                    ]}
+                  >
+                    <Text style={styles.memberBudgetText}>
+                      {member.recommended_outfit.is_within_budget
+                        ? '✓ Within Budget'
+                        : '⚠️ Over Budget'}
+                    </Text>
+                  </View>
                 </View>
 
                 {member.recommended_outfit.items.map((item, itemIdx) => (
@@ -218,6 +295,11 @@ const styles = StyleSheet.create({
     padding: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: 400,
+  },
+  emptyIcon: {
+    fontSize: 44,
+    marginBottom: 12,
   },
   emptyTitle: {
     color: '#F1F5F9',
@@ -241,8 +323,30 @@ const styles = StyleSheet.create({
   },
   createButtonText: {
     color: '#0F1318',
-    fontWeight: '700',
+    fontWeight: '800',
     fontSize: 14,
+  },
+  errorBanner: {
+    backgroundColor: '#450A0A',
+    borderColor: '#991B1B',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 14,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  errorText: {
+    color: '#FECACA',
+    fontSize: 12,
+    flex: 1,
+  },
+  errorDismiss: {
+    color: '#F87171',
+    fontSize: 11,
+    fontWeight: '700',
+    marginLeft: 8,
   },
   headerCard: {
     backgroundColor: '#121820',
@@ -256,7 +360,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 8,
   },
   roomCodeBadge: {
     backgroundColor: '#1E293B',
@@ -267,28 +371,25 @@ const styles = StyleSheet.create({
   roomCodeText: {
     color: '#94A3B8',
     fontSize: 10,
-    fontWeight: '700',
+    fontWeight: '800',
+    letterSpacing: 1,
   },
   cohesionBadge: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    backgroundColor: 'rgba(16, 185, 129, 0.15)',
-    paddingHorizontal: 10,
+    backgroundColor: '#065F46',
+    paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#10B981',
+    borderRadius: 6,
+    alignItems: 'center',
   },
   cohesionScore: {
-    color: '#10B981',
+    color: '#FFFFFF',
     fontSize: 14,
-    fontWeight: '800',
-    marginRight: 4,
+    fontWeight: '900',
   },
   cohesionLabel: {
-    color: '#10B981',
-    fontSize: 9,
-    fontWeight: '700',
+    color: '#A7F3D0',
+    fontSize: 8,
+    fontWeight: '800',
   },
   title: {
     color: '#FFFFFF',
@@ -312,38 +413,38 @@ const styles = StyleSheet.create({
   paletteLabel: {
     color: '#64748B',
     fontSize: 11,
-    marginRight: 4,
+    fontWeight: '600',
   },
   paletteChip: {
-    backgroundColor: '#1A232E',
+    backgroundColor: '#1A2330',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#2D3A4B',
+    borderColor: '#263342',
   },
   paletteChipText: {
-    color: '#E2E8F0',
+    color: '#CBD5E1',
     fontSize: 11,
     fontWeight: '600',
   },
   summaryBox: {
-    backgroundColor: '#0F151D',
-    padding: 10,
+    backgroundColor: '#0B0F14',
+    padding: 12,
     borderRadius: 8,
-    marginBottom: 14,
     borderLeftWidth: 3,
-    borderLeftColor: '#10B981',
+    borderLeftColor: '#E5B869',
+    marginBottom: 14,
   },
   summaryTitle: {
-    color: '#10B981',
+    color: '#E5B869',
     fontSize: 10,
-    fontWeight: '700',
+    fontWeight: '800',
     marginBottom: 4,
     textTransform: 'uppercase',
   },
   summaryText: {
-    color: '#CBD5E1',
+    color: '#E2E8F0',
     fontSize: 12,
     lineHeight: 18,
   },
@@ -352,20 +453,28 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   coordinateBtn: {
-    flex: 2,
+    flex: 3,
     backgroundColor: '#E5B869',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  btnDisabled: {
+    opacity: 0.6,
+  },
+  loadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   coordinateBtnText: {
     color: '#0F1318',
+    fontSize: 12,
     fontWeight: '800',
-    fontSize: 13,
+    letterSpacing: 0.5,
   },
   addFriendBtn: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#1E293B',
     paddingVertical: 12,
     borderRadius: 8,
@@ -374,14 +483,14 @@ const styles = StyleSheet.create({
     borderColor: '#334155',
   },
   addFriendBtnText: {
-    color: '#E2E8F0',
-    fontWeight: '600',
+    color: '#F8FAFC',
     fontSize: 12,
+    fontWeight: '700',
   },
   friendForm: {
     backgroundColor: '#151C24',
+    borderRadius: 12,
     padding: 14,
-    borderRadius: 10,
     marginBottom: 16,
     borderWidth: 1,
     borderColor: '#263342',
@@ -389,38 +498,64 @@ const styles = StyleSheet.create({
   formTitle: {
     color: '#F8FAFC',
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '800',
     marginBottom: 10,
   },
   input: {
     backgroundColor: '#0B0F14',
     color: '#FFFFFF',
     paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 6,
+    paddingVertical: 10,
+    borderRadius: 8,
     borderWidth: 1,
     borderColor: '#263342',
-    fontSize: 12,
-    marginBottom: 8,
+    fontSize: 13,
+    marginBottom: 10,
+  },
+  genderSelectRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 12,
+  },
+  genderSelectBtn: {
+    flex: 1,
+    backgroundColor: '#0B0F14',
+    paddingVertical: 8,
+    borderRadius: 6,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#263342',
+  },
+  genderSelectActive: {
+    backgroundColor: '#E5B869',
+    borderColor: '#E5B869',
+  },
+  genderSelectText: {
+    color: '#94A3B8',
+    fontSize: 11,
+    fontWeight: '700',
+  },
+  genderSelectTextActive: {
+    color: '#0F1318',
   },
   submitFriendBtn: {
-    backgroundColor: '#10B981',
+    backgroundColor: '#38BDF8',
     paddingVertical: 10,
     borderRadius: 6,
     alignItems: 'center',
   },
   submitFriendBtnText: {
-    color: '#FFFFFF',
-    fontWeight: '700',
+    color: '#0F1318',
     fontSize: 12,
+    fontWeight: '800',
   },
   membersSection: {
-    marginTop: 8,
+    marginTop: 4,
   },
   membersHeader: {
     color: '#94A3B8',
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '800',
     letterSpacing: 1,
     textTransform: 'uppercase',
     marginBottom: 12,
@@ -429,23 +564,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#121820',
     borderRadius: 12,
     padding: 14,
-    marginBottom: 16,
+    marginBottom: 14,
     borderWidth: 1,
     borderColor: '#1E293B',
   },
   memberMetaRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginBottom: 12,
   },
   memberName: {
     color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: 15,
+    fontWeight: '800',
   },
   memberStyle: {
-    color: '#64748B',
+    color: '#94A3B8',
     fontSize: 11,
     marginTop: 2,
   },
@@ -456,40 +591,48 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   budgetPillText: {
-    color: '#E5B869',
+    color: '#E2E8F0',
     fontSize: 11,
     fontWeight: '700',
   },
   outfitSubSection: {
-    marginTop: 6,
+    borderTopWidth: 1,
+    borderTopColor: '#1E293B',
+    paddingTop: 12,
   },
   outfitStatsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    alignItems: 'center',
     marginBottom: 12,
   },
   outfitTotal: {
-    color: '#E2E8F0',
-    fontSize: 13,
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  memberBudgetBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 6,
+  },
+  memberBudgetText: {
+    color: '#FFFFFF',
+    fontSize: 10,
     fontWeight: '700',
   },
-  outfitStatus: {
-    color: '#10B981',
-    fontSize: 12,
-    fontWeight: '600',
-  },
   pendingOutfitBox: {
-    backgroundColor: '#0B0F14',
-    padding: 16,
+    backgroundColor: '#0D1117',
+    padding: 12,
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#1E293B',
+    borderStyle: 'dashed',
     alignItems: 'center',
   },
   pendingText: {
     color: '#64748B',
-    fontSize: 12,
+    fontSize: 11,
     textAlign: 'center',
   },
 });

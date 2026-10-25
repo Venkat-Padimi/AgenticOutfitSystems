@@ -25,7 +25,7 @@ class ConstraintEngine:
             return ConstraintEvaluation(
                 constraint_type=ConstraintType.BUDGET,
                 status=ConstraintStatus.PASSED,
-                details=f"Outfit total ₹{total:,.2f} is within budget ₹{target_budget:,.2f} (Savings: ₹{diff:,.2f})",
+                details=f"Outfit total INR {total:,.2f} is within budget INR {target_budget:,.2f} (Savings: INR {diff:,.2f})",
                 replan_triggered=False,
                 target_value=target_budget,
                 actual_value=total
@@ -35,7 +35,7 @@ class ConstraintEngine:
             return ConstraintEvaluation(
                 constraint_type=ConstraintType.BUDGET,
                 status=ConstraintStatus.VIOLATED,
-                details=f"Outfit total ₹{total:,.2f} exceeds target budget ₹{target_budget:,.2f} by ₹{overrun:,.2f}",
+                details=f"Outfit total INR {total:,.2f} exceeds target budget INR {target_budget:,.2f} by INR {overrun:,.2f}",
                 replan_triggered=True,
                 target_value=target_budget,
                 actual_value=total

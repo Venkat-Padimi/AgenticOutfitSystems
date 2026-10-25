@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { getApiBaseUrl } from '../api/client';
 
 interface HeaderProps {
   activeTab: 'studio' | 'trace' | 'outfit' | 'blend';
   setActiveTab: (tab: 'studio' | 'trace' | 'outfit' | 'blend') => void;
   isBackendHealthy: boolean;
   itemCount: number;
+  engine?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -13,24 +15,33 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   isBackendHealthy,
   itemCount,
+  engine,
 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
-        <View>
+        <View style={styles.brandContainer}>
           <Text style={styles.brandTitle}>AURA STYLIST</Text>
-          <Text style={styles.subTitle}>Agentic Outfit Architecture & Shopping</Text>
+          <Text style={styles.subTitle}>Autonomous Outfit Architecture • Blend</Text>
         </View>
-        <View style={styles.statusBadge}>
+
+        <View style={styles.statusGroup}>
           <View
             style={[
-              styles.statusDot,
-              { backgroundColor: isBackendHealthy ? '#10B981' : '#F59E0B' },
+              styles.statusBadge,
+              { borderColor: isBackendHealthy ? '#065F46' : '#991B1B' },
             ]}
-          />
-          <Text style={styles.statusText}>
-            {isBackendHealthy ? 'Agent Online' : 'Local Engine'}
-          </Text>
+          >
+            <View
+              style={[
+                styles.statusDot,
+                { backgroundColor: isBackendHealthy ? '#10B981' : '#EF4444' },
+              ]}
+            />
+            <Text style={styles.statusText}>
+              {isBackendHealthy ? 'Agent Online' : 'Backend Offline'}
+            </Text>
+          </View>
         </View>
       </View>
 
@@ -67,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
           onPress={() => setActiveTab('blend')}
         >
           <Text style={[styles.tabText, activeTab === 'blend' && styles.activeTabText]}>
-            Blend (Group)
+            Blend
           </Text>
         </TouchableOpacity>
       </View>
@@ -88,30 +99,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 14,
+  },
+  brandContainer: {
+    flex: 1,
   },
   brandTitle: {
-    fontSize: 22,
-    fontWeight: '800',
+    fontSize: 20,
+    fontWeight: '900',
     letterSpacing: 2,
     color: '#E5B869', // Champagne Gold
-    fontFamily: 'System',
   },
   subTitle: {
-    fontSize: 11,
-    color: '#9CA3AF',
+    fontSize: 10,
+    color: '#94A3B8',
     marginTop: 2,
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
+  },
+  statusGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   statusBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#171E27',
-    paddingHorizontal: 10,
+    backgroundColor: '#121820',
+    paddingHorizontal: 9,
     paddingVertical: 5,
-    borderRadius: 14,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#263342',
   },
   statusDot: {
     width: 7,
@@ -120,9 +136,10 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   statusText: {
-    fontSize: 11,
+    fontSize: 10,
     color: '#E2E8F0',
-    fontWeight: '600',
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
   tabBar: {
     flexDirection: 'row',
@@ -146,6 +163,6 @@ const styles = StyleSheet.create({
   },
   activeTabText: {
     color: '#0F1318',
-    fontWeight: '700',
+    fontWeight: '800',
   },
 });

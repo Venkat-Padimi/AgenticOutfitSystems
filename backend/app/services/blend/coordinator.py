@@ -67,12 +67,12 @@ class BlendCoordinator:
         session.members.append(new_member)
         return session
 
-    async def coordinate_outfits(self, blend_id: str) -> Optional[BlendSession]:
+    async def coordinate_outfits(self, blend_id: str, force_fixture: Optional[str] = None) -> Optional[BlendSession]:
         session = self.sessions.get(blend_id)
         if not session:
             return None
 
-        orchestrator = AgentOrchestrator()
+        orchestrator = AgentOrchestrator(force_fixture=force_fixture)
 
         # Generate coordinated outfits for all members
         for idx, member in enumerate(session.members):

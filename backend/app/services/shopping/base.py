@@ -2,6 +2,10 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.models.schemas import ProductItem
 
+class ShoppingProviderError(Exception):
+    """Raised when an external shopping provider encounters an API error, rate limit, or network failure."""
+    pass
+
 class IProductSearchProvider(ABC):
     """
     Provider-independent contract for discovering real clothing items.

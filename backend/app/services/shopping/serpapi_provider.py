@@ -3,7 +3,7 @@ import uuid
 from typing import List, Optional
 import httpx
 from app.models.schemas import ProductItem, DataSourceEnum
-from app.services.shopping.base import IProductSearchProvider
+from app.services.shopping.base import IProductSearchProvider, ShoppingProviderError
 
 class SerpApiShoppingProvider(IProductSearchProvider):
     """
@@ -62,11 +62,16 @@ class SerpApiShoppingProvider(IProductSearchProvider):
         items: List[ProductItem] = []
 
         try:
-            async with httpx.AsyncClient(timeout=15.0) as client:
+            async with httpx.AsyncClient(timeout=20.0) as client:
                 resp = await client.get(self.base_url, params=params)
                 if resp.status_code != 200:
-                    print(f"[SerpApi Error] Status {resp.status_code}: {resp.text}")
-                    return []
+                    try:
+                        err_detail = resp.json().get("error", resp.text)
+                    except Exception:
+                        err_detail = resp.text
+                    clean_err = re.sub(r'api_key=[0-9a-zA-Z]+', 'api_key=[REDACTED]', str(err_detail))
+                    print(f"[SerpApi Error] Status {resp.status_code}: {clean_err}")
+                    raise ShoppingProviderError(f"SerpApi Error {resp.status_code}: {clean_err}")
                 
                 data = resp.json()
                 shopping_results = data.get("shopping_results", [])
@@ -108,9 +113,13 @@ class SerpApiShoppingProvider(IProductSearchProvider):
                     if len(items) >= limit:
                         break
 
+        except ShoppingProviderError:
+            raise
         except Exception as e:
-            print(f"[SerpApi Exception] Failed to execute live search: {e}")
-            return []
+            err_text = str(e) or e.__class__.__name__
+            clean_exc = re.sub(r'api_key=[0-9a-zA-Z]+', 'api_key=[REDACTED]', err_text)
+            print(f"[SerpApi Exception] Failed to execute live search: {clean_exc}")
+            raise ShoppingProviderError(f"SerpApi network exception: {clean_exc}") from None
 
         return items
 

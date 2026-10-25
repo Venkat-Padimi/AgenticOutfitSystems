@@ -67,6 +67,10 @@ export interface OutfitRecommendation {
   trace_steps: AgentTraceStep[];
   visualization_url?: string;
   created_at: string;
+  orchestration_engine?: 'gemini' | 'deterministic_fallback';
+  status?: 'complete' | 'partial' | 'failed' | 'deadline_exceeded';
+  data_source_mode?: DataSource;
+  error_message?: string;
 }
 
 export interface BlendMember {
