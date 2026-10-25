@@ -211,10 +211,17 @@ export async function joinBlend(params: {
   return await response.json();
 }
 
-export async function coordinateBlend(blendId: string): Promise<BlendSession> {
+export async function coordinateBlend(
+  blendId: string,
+  forceFixture?: string
+): Promise<BlendSession> {
   const baseUrl = getApiBaseUrl();
+  const url = forceFixture
+    ? `${baseUrl}/api/v1/blend/${blendId}/coordinate?force_fixture=${encodeURIComponent(forceFixture)}`
+    : `${baseUrl}/api/v1/blend/${blendId}/coordinate`;
+
   const response = await fetchWithTimeout(
-    `${baseUrl}/api/v1/blend/${blendId}/coordinate`,
+    url,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -229,3 +236,35 @@ export async function coordinateBlend(blendId: string): Promise<BlendSession> {
 
   return await response.json();
 }
+
+export async function swapBlendItem(params: {
+  blend_id: string;
+  member_id: string;
+  rejected_item_id: string;
+  feedback_text?: string;
+  target_category?: string;
+  force_fixture?: string;
+}): Promise<BlendSession> {
+  const baseUrl = getApiBaseUrl();
+  const url = params.force_fixture
+    ? `${baseUrl}/api/v1/blend/swap?force_fixture=${encodeURIComponent(params.force_fixture)}`
+    : `${baseUrl}/api/v1/blend/swap`;
+
+  const response = await fetchWithTimeout(
+    url,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    },
+    60000
+  );
+
+  if (!response.ok) {
+    const errorMsg = await extractErrorMessage(response);
+    throw new Error(`Failed to swap item: ${errorMsg}`);
+  }
+
+  return await response.json();
+}
+

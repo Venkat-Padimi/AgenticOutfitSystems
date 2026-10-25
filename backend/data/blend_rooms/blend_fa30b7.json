@@ -1,0 +1,658 @@
+{
+  "blend_id": "blend_fa30b7",
+  "title": "College Farewell 2026",
+  "occasion": "Graduation Gala",
+  "shared_theme": "Royal Retro",
+  "shared_palette": [
+    "Navy",
+    "Champagne Gold"
+  ],
+  "event_date": null,
+  "created_by": "Arjun",
+  "members": [
+    {
+      "user_id": "user_host",
+      "display_name": "Arjun",
+      "budget_inr": 6000.0,
+      "gender": "men",
+      "sizes": {
+        "top": "M",
+        "bottom": "32",
+        "shoes": "UK 9"
+      },
+      "personal_style": "Tailored sharp formal",
+      "preferred_colors": [],
+      "avoid_colors": [],
+      "required_categories": [
+        "top",
+        "bottom",
+        "shoes"
+      ],
+      "recommended_outfit": {
+        "outfit_id": "74ba039a",
+        "user_id": "user_host",
+        "occasion": "Graduation Gala",
+        "theme": "Royal Retro (Tailored sharp formal)",
+        "items": [
+          {
+            "id": "top_m_02",
+            "title": "Rare Rabbit Men Solid Cotton Linen Relaxed Fit Smart Casual Blazer",
+            "brand": "Rare Rabbit",
+            "category": "top",
+            "price_inr": 2199.0,
+            "original_price_inr": 2969.0,
+            "merchant": "Ajio",
+            "product_url": "https://www.ajio.com/rare-rabbit-solid-blazer",
+            "image_url": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500",
+            "rating": 4.4,
+            "reviews_count": 184,
+            "available_sizes": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "delivery_estimate": "Delivery in 3 days",
+            "data_source": "controlled_fixture",
+            "retrieved_at": "2026-10-25T17:13:05.824597+00:00"
+          },
+          {
+            "id": "bot_m_01",
+            "title": "Arrow Men Beige Super Slim Fit Flat-Front Stretch Chinos",
+            "brand": "Arrow",
+            "category": "bottom",
+            "price_inr": 1299.0,
+            "original_price_inr": 1754.0,
+            "merchant": "Amazon India",
+            "product_url": "https://www.amazon.in/dp/B08X9QWXYZ",
+            "image_url": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500",
+            "rating": 4.3,
+            "reviews_count": 250,
+            "available_sizes": [
+              "30",
+              "32",
+              "34",
+              "36"
+            ],
+            "delivery_estimate": "Delivery in 2 days (Prime)",
+            "data_source": "controlled_fixture",
+            "retrieved_at": "2026-10-25T17:13:05.855163+00:00"
+          },
+          {
+            "id": "shoe_m_01",
+            "title": "Hush Puppies Men Brown Leather Handcrafted Tassel Loafers",
+            "brand": "Hush Puppies",
+            "category": "shoes",
+            "price_inr": 1899.0,
+            "original_price_inr": 2564.0,
+            "merchant": "Tata CLiQ",
+            "product_url": "https://www.tatacliq.com/hush-puppies-loafers",
+            "image_url": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500",
+            "rating": 4.6,
+            "reviews_count": 98,
+            "available_sizes": [
+              "UK 8",
+              "UK 9",
+              "UK 10"
+            ],
+            "delivery_estimate": "Delivery in 3 days",
+            "data_source": "controlled_fixture",
+            "retrieved_at": "2026-10-25T17:13:05.855268+00:00"
+          }
+        ],
+        "total_price_inr": 5397.0,
+        "target_budget_inr": 6000.0,
+        "is_within_budget": true,
+        "harmony_score": 94.0,
+        "stylist_rationale": "Assembled a cohesive Royal Retro (Tailored sharp formal) ensemble for Graduation Gala. Selected 3 complementary pieces adhering to the specified palette (Navy, Champagne Gold) while strictly honoring your budget of INR 6,000.",
+        "tradeoffs_considered": [
+          "Balanced fabric quality against strict budget ceiling.",
+          "Prioritized versatile footwear matching both trousers and smart layers.",
+          "Verified retailer availability across Indian e-commerce partners."
+        ],
+        "trace_steps": [
+          {
+            "step_number": 1,
+            "phase": "UNDERSTAND_GOAL",
+            "thought": "Notice: Controlled test fixture requested for benchmark scenario reproducibility.\nGoal: Assemble complete look for 'Graduation Gala', theme 'Royal Retro (Tailored sharp formal)', gender 'men', budget INR 6,000.",
+            "tool_called": "DecomposeStylingGoal",
+            "tool_input": {
+              "occasion": "Graduation Gala",
+              "budget": 6000.0,
+              "gender": "men"
+            },
+            "tool_output": {
+              "status": "Goal understood, formulating subtasks",
+              "orchestration_engine": "deterministic_fallback"
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.766918+00:00"
+          },
+          {
+            "step_number": 2,
+            "phase": "DECOMPOSE_PLAN",
+            "thought": "Decomposed goal into wardrobe categories: top, bottom, shoes, accessory.",
+            "tool_called": "PlanSubtasks",
+            "tool_input": {
+              "subtasks": [
+                "top",
+                "bottom",
+                "shoes",
+                "accessory"
+              ]
+            },
+            "tool_output": {
+              "subtasks": [
+                "top",
+                "bottom",
+                "shoes",
+                "accessory"
+              ]
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.793992+00:00"
+          },
+          {
+            "step_number": 3,
+            "phase": "SELECT_TOOL",
+            "thought": "Selecting tool 'SearchProducts' to discover anchor top piece. Target sub-budget: INR 2,700.",
+            "tool_called": "SearchProducts",
+            "tool_input": {
+              "query": "Royal Retro (Tailored sharp formal) blazer shirt",
+              "category": "top",
+              "max_price": 2700.0
+            },
+            "tool_output": {
+              "found_count": 1,
+              "selected_top": "Rare Rabbit Men Solid Cotton Linen Relaxed Fit Smart Casual Blazer",
+              "price_inr": 2199.0,
+              "merchant": "Ajio"
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.824488+00:00"
+          },
+          {
+            "step_number": 4,
+            "phase": "EVALUATE_CONSTRAINTS",
+            "thought": "Evaluating hard constraints. Total price is INR 5,397.00 vs Budget INR 6,000.00.",
+            "tool_called": "CalculateOutfitBudget",
+            "tool_input": {
+              "budget": 6000.0
+            },
+            "tool_output": {
+              "total_price_inr": 5397.0,
+              "is_valid": true
+            },
+            "constraint_check": {
+              "constraint_type": "budget",
+              "status": "PASSED",
+              "details": "Outfit total INR 5,397.00 is within budget INR 6,000.00 (Savings: INR 603.00)",
+              "replan_triggered": false,
+              "target_value": 6000.0,
+              "actual_value": 5397.0
+            },
+            "timestamp": "2026-10-25T17:13:05.855336+00:00"
+          },
+          {
+            "step_number": 5,
+            "phase": "COMPLETED",
+            "thought": "Outfit assembly complete! Assembled 3 verified items satisfying constraints. Total: INR 5,397.00.",
+            "tool_called": "SynthesizeFinalOutfit",
+            "tool_input": null,
+            "tool_output": {
+              "assembled_items": [
+                {
+                  "id": "top_m_02",
+                  "title": "Rare Rabbit Men Solid Cotton Linen Relaxed Fit Smart Casual Blazer",
+                  "brand": "Rare Rabbit",
+                  "category": "top",
+                  "price_inr": 2199.0,
+                  "original_price_inr": 2969.0,
+                  "merchant": "Ajio",
+                  "product_url": "https://www.ajio.com/rare-rabbit-solid-blazer",
+                  "image_url": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500",
+                  "rating": 4.4,
+                  "reviews_count": 184,
+                  "available_sizes": [
+                    "S",
+                    "M",
+                    "L",
+                    "XL"
+                  ],
+                  "delivery_estimate": "Delivery in 3 days",
+                  "data_source": "controlled_fixture",
+                  "retrieved_at": "2026-10-25T17:13:05.824597+00:00"
+                },
+                {
+                  "id": "bot_m_01",
+                  "title": "Arrow Men Beige Super Slim Fit Flat-Front Stretch Chinos",
+                  "brand": "Arrow",
+                  "category": "bottom",
+                  "price_inr": 1299.0,
+                  "original_price_inr": 1754.0,
+                  "merchant": "Amazon India",
+                  "product_url": "https://www.amazon.in/dp/B08X9QWXYZ",
+                  "image_url": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500",
+                  "rating": 4.3,
+                  "reviews_count": 250,
+                  "available_sizes": [
+                    "30",
+                    "32",
+                    "34",
+                    "36"
+                  ],
+                  "delivery_estimate": "Delivery in 2 days (Prime)",
+                  "data_source": "controlled_fixture",
+                  "retrieved_at": "2026-10-25T17:13:05.855163+00:00"
+                },
+                {
+                  "id": "shoe_m_01",
+                  "title": "Hush Puppies Men Brown Leather Handcrafted Tassel Loafers",
+                  "brand": "Hush Puppies",
+                  "category": "shoes",
+                  "price_inr": 1899.0,
+                  "original_price_inr": 2564.0,
+                  "merchant": "Tata CLiQ",
+                  "product_url": "https://www.tatacliq.com/hush-puppies-loafers",
+                  "image_url": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500",
+                  "rating": 4.6,
+                  "reviews_count": 98,
+                  "available_sizes": [
+                    "UK 8",
+                    "UK 9",
+                    "UK 10"
+                  ],
+                  "delivery_estimate": "Delivery in 3 days",
+                  "data_source": "controlled_fixture",
+                  "retrieved_at": "2026-10-25T17:13:05.855268+00:00"
+                }
+              ],
+              "total_price_inr": 5397.0,
+              "is_within_budget": true,
+              "orchestration_engine": "deterministic_fallback",
+              "status": "complete"
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.885999+00:00"
+          }
+        ],
+        "visualization_url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800",
+        "created_at": "2026-10-25T17:13:05.886178+00:00",
+        "orchestration_engine": "deterministic_fallback",
+        "status": "complete",
+        "data_source_mode": "controlled_fixture",
+        "error_message": null
+      },
+      "status": "ready",
+      "is_valid": true,
+      "unresolved_constraints": []
+    },
+    {
+      "user_id": "user_047e03",
+      "display_name": "Sneha",
+      "budget_inr": 3500.0,
+      "gender": "women",
+      "sizes": {
+        "top": "S",
+        "bottom": "28",
+        "shoes": "UK 5"
+      },
+      "personal_style": "Indo-Western fusion",
+      "preferred_colors": [],
+      "avoid_colors": [],
+      "required_categories": [
+        "top",
+        "bottom",
+        "shoes"
+      ],
+      "recommended_outfit": {
+        "outfit_id": "28ccc6e4",
+        "user_id": "user_047e03",
+        "occasion": "Graduation Gala",
+        "theme": "Royal Retro (Indo-Western fusion)",
+        "items": [
+          {
+            "id": "top_w_01",
+            "title": "W for Woman Navy & Champagne Embroidered Anarkali Kurta Set",
+            "brand": "W for Woman",
+            "category": "ethnic",
+            "price_inr": 2499.0,
+            "original_price_inr": 3124.0,
+            "merchant": "Myntra",
+            "product_url": "https://www.myntra.com/kurta-sets/w/navy-embroidered-set",
+            "image_url": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500",
+            "rating": 4.7,
+            "reviews_count": 340,
+            "available_sizes": [
+              "XS",
+              "S",
+              "M",
+              "L"
+            ],
+            "delivery_estimate": "Delivery in 2 days",
+            "data_source": "controlled_fixture",
+            "retrieved_at": "2026-10-25T17:13:05.946234+00:00"
+          },
+          {
+            "id": "shoe_w_02",
+            "title": "Catwalk Women Metallic Champagne Embellished Ethnic Mojaris",
+            "brand": "Catwalk",
+            "category": "shoes",
+            "price_inr": 899.0,
+            "original_price_inr": 1214.0,
+            "merchant": "Myntra",
+            "product_url": "https://www.myntra.com/flats/catwalk/champagne-mojaris",
+            "image_url": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
+            "rating": 4.5,
+            "reviews_count": 210,
+            "available_sizes": [
+              "UK 4",
+              "UK 5",
+              "UK 6",
+              "UK 7"
+            ],
+            "delivery_estimate": "Delivery in 2 days",
+            "data_source": "controlled_fixture",
+            "retrieved_at": "2026-10-25T17:13:05.977150+00:00"
+          }
+        ],
+        "total_price_inr": 3398.0,
+        "target_budget_inr": 3500.0,
+        "is_within_budget": true,
+        "harmony_score": 94.0,
+        "stylist_rationale": "Assembled a cohesive Royal Retro (Indo-Western fusion) ensemble for Graduation Gala. Selected 2 complementary pieces adhering to the specified palette (Champagne Gold, Navy) while strictly honoring your budget of INR 3,500.",
+        "tradeoffs_considered": [
+          "Balanced fabric quality against strict budget ceiling.",
+          "Prioritized versatile footwear matching both trousers and smart layers.",
+          "Verified retailer availability across Indian e-commerce partners."
+        ],
+        "trace_steps": [
+          {
+            "step_number": 1,
+            "phase": "UNDERSTAND_GOAL",
+            "thought": "Notice: Controlled test fixture requested for benchmark scenario reproducibility.\nGoal: Assemble complete look for 'Graduation Gala', theme 'Royal Retro (Indo-Western fusion)', gender 'women', budget INR 3,500.",
+            "tool_called": "DecomposeStylingGoal",
+            "tool_input": {
+              "occasion": "Graduation Gala",
+              "budget": 3500.0,
+              "gender": "women"
+            },
+            "tool_output": {
+              "status": "Goal understood, formulating subtasks",
+              "orchestration_engine": "deterministic_fallback"
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.886353+00:00"
+          },
+          {
+            "step_number": 2,
+            "phase": "DECOMPOSE_PLAN",
+            "thought": "Decomposed goal into wardrobe categories: top, bottom, shoes, accessory.",
+            "tool_called": "PlanSubtasks",
+            "tool_input": {
+              "subtasks": [
+                "top",
+                "bottom",
+                "shoes",
+                "accessory"
+              ]
+            },
+            "tool_output": {
+              "subtasks": [
+                "top",
+                "bottom",
+                "shoes",
+                "accessory"
+              ]
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.916159+00:00"
+          },
+          {
+            "step_number": 3,
+            "phase": "SELECT_TOOL",
+            "thought": "Selecting tool 'SearchProducts' to discover anchor top piece. Target sub-budget: INR 2,275.",
+            "tool_called": "SearchProducts",
+            "tool_input": {
+              "query": "Royal Retro (Indo-Western fusion) kurta dress set",
+              "category": "top",
+              "max_price": 2275.0
+            },
+            "tool_output": {
+              "found_count": 2,
+              "selected_top": "W for Woman Navy & Champagne Embroidered Anarkali Kurta Set",
+              "price_inr": 2499.0,
+              "merchant": "Myntra"
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:05.946137+00:00"
+          },
+          {
+            "step_number": 4,
+            "phase": "EVALUATE_CONSTRAINTS",
+            "thought": "Evaluating hard constraints. Total price is INR 3,398.00 vs Budget INR 3,500.00.",
+            "tool_called": "CalculateOutfitBudget",
+            "tool_input": {
+              "budget": 3500.0
+            },
+            "tool_output": {
+              "total_price_inr": 3398.0,
+              "is_valid": true
+            },
+            "constraint_check": {
+              "constraint_type": "budget",
+              "status": "PASSED",
+              "details": "Outfit total INR 3,398.00 is within budget INR 3,500.00 (Savings: INR 102.00)",
+              "replan_triggered": false,
+              "target_value": 3500.0,
+              "actual_value": 3398.0
+            },
+            "timestamp": "2026-10-25T17:13:05.977209+00:00"
+          },
+          {
+            "step_number": 5,
+            "phase": "COMPLETED",
+            "thought": "Outfit assembly complete! Assembled 2 verified items satisfying constraints. Total: INR 3,398.00.",
+            "tool_called": "SynthesizeFinalOutfit",
+            "tool_input": null,
+            "tool_output": {
+              "assembled_items": [
+                {
+                  "id": "top_w_01",
+                  "title": "W for Woman Navy & Champagne Embroidered Anarkali Kurta Set",
+                  "brand": "W for Woman",
+                  "category": "ethnic",
+                  "price_inr": 2499.0,
+                  "original_price_inr": 3124.0,
+                  "merchant": "Myntra",
+                  "product_url": "https://www.myntra.com/kurta-sets/w/navy-embroidered-set",
+                  "image_url": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500",
+                  "rating": 4.7,
+                  "reviews_count": 340,
+                  "available_sizes": [
+                    "XS",
+                    "S",
+                    "M",
+                    "L"
+                  ],
+                  "delivery_estimate": "Delivery in 2 days",
+                  "data_source": "controlled_fixture",
+                  "retrieved_at": "2026-10-25T17:13:05.946234+00:00"
+                },
+                {
+                  "id": "shoe_w_02",
+                  "title": "Catwalk Women Metallic Champagne Embellished Ethnic Mojaris",
+                  "brand": "Catwalk",
+                  "category": "shoes",
+                  "price_inr": 899.0,
+                  "original_price_inr": 1214.0,
+                  "merchant": "Myntra",
+                  "product_url": "https://www.myntra.com/flats/catwalk/champagne-mojaris",
+                  "image_url": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
+                  "rating": 4.5,
+                  "reviews_count": 210,
+                  "available_sizes": [
+                    "UK 4",
+                    "UK 5",
+                    "UK 6",
+                    "UK 7"
+                  ],
+                  "delivery_estimate": "Delivery in 2 days",
+                  "data_source": "controlled_fixture",
+                  "retrieved_at": "2026-10-25T17:13:05.977150+00:00"
+                }
+              ],
+              "total_price_inr": 3398.0,
+              "is_within_budget": true,
+              "orchestration_engine": "deterministic_fallback",
+              "status": "complete"
+            },
+            "constraint_check": null,
+            "timestamp": "2026-10-25T17:13:06.008290+00:00"
+          }
+        ],
+        "visualization_url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800",
+        "created_at": "2026-10-25T17:13:06.008573+00:00",
+        "orchestration_engine": "deterministic_fallback",
+        "status": "complete",
+        "data_source_mode": "controlled_fixture",
+        "error_message": null
+      },
+      "status": "ready",
+      "is_valid": true,
+      "unresolved_constraints": []
+    }
+  ],
+  "group_cohesion_score": 89.0,
+  "score_breakdown": {
+    "overall_score": 89.0,
+    "palette_harmony": 77.6,
+    "formality_consistency": 83.0,
+    "budget_compliance": 100.0,
+    "category_completeness": 100.0,
+    "preference_adherence": 91.0,
+    "summary_notes": [
+      "Moderate palette alignment with some neutral or complementary transitions.",
+      "Target formality 'Formal' consistency: 83%.",
+      "100% budget adherence across all individual members."
+    ],
+    "is_provisional": false
+  },
+  "harmonization_summary": "Harmonized 2 looks around 'Royal Retro' (Cohesion: 89.0%). Color palette balance: 77.6%, Formality: 83.0%, Budget compliance: 100.0%. All individual budgets strictly preserved.",
+  "trace_steps": [
+    {
+      "step_number": 1,
+      "phase": "UNDERSTAND_GOAL",
+      "thought": "Initialized Blend room 'College Farewell 2026' for occasion 'Graduation Gala' with shared palette: Navy, Champagne Gold.",
+      "tool_called": "InitializeBlendRoom",
+      "tool_input": null,
+      "tool_output": {
+        "blend_id": "blend_fa30b7",
+        "host": "Arjun",
+        "host_budget": 6000.0
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:13:05.149591+00:00"
+    },
+    {
+      "step_number": 2,
+      "phase": "UNDERSTAND_GOAL",
+      "thought": "Friend 'Sneha' joined Blend room. Added individual budget INR 3,500.00 and personal style 'Indo-Western fusion'.",
+      "tool_called": "JoinBlendRoom",
+      "tool_input": null,
+      "tool_output": {
+        "member_id": "user_047e03",
+        "display_name": "Sneha",
+        "budget": 3500.0
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:13:05.150912+00:00"
+    },
+    {
+      "step_number": 3,
+      "phase": "DECOMPOSE_PLAN",
+      "thought": "Group Planning: Formulated color distribution across 2 members to ensure complementary balance without identical styling.",
+      "tool_called": "PlanGroupPaletteDistribution",
+      "tool_input": null,
+      "tool_output": {
+        "color_roles": {
+          "user_host": [
+            "Navy",
+            "Champagne Gold"
+          ],
+          "user_047e03": [
+            "Champagne Gold",
+            "Navy"
+          ]
+        },
+        "palette": [
+          "Navy",
+          "Champagne Gold"
+        ]
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:13:05.766846+00:00"
+    },
+    {
+      "step_number": 4,
+      "phase": "EVALUATE_CONSTRAINTS",
+      "thought": "Verified Arjun's ensemble: Total INR 5,397.00 / Budget INR 6,000.00 (PASSED).",
+      "tool_called": "ValidateMemberConstraints",
+      "tool_input": null,
+      "tool_output": {
+        "member": "Arjun",
+        "valid": true,
+        "total_inr": 5397.0,
+        "budget_inr": 6000.0,
+        "unresolved": []
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:13:05.886301+00:00"
+    },
+    {
+      "step_number": 5,
+      "phase": "EVALUATE_CONSTRAINTS",
+      "thought": "Verified Sneha's ensemble: Total INR 3,398.00 / Budget INR 3,500.00 (PASSED).",
+      "tool_called": "ValidateMemberConstraints",
+      "tool_input": null,
+      "tool_output": {
+        "member": "Sneha",
+        "valid": true,
+        "total_inr": 3398.0,
+        "budget_inr": 3500.0,
+        "unresolved": []
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:13:06.008776+00:00"
+    },
+    {
+      "step_number": 6,
+      "phase": "COMPLETED",
+      "thought": "Coordination complete. Computed group cohesion 89.0% across 2 members.",
+      "tool_called": "FinalizeGroupCoordination",
+      "tool_input": null,
+      "tool_output": {
+        "cohesion_score": 89.0,
+        "breakdown": {
+          "overall_score": 89.0,
+          "palette_harmony": 77.6,
+          "formality_consistency": 83.0,
+          "budget_compliance": 100.0,
+          "category_completeness": 100.0,
+          "preference_adherence": 91.0,
+          "summary_notes": [
+            "Moderate palette alignment with some neutral or complementary transitions.",
+            "Target formality 'Formal' consistency: 83%.",
+            "100% budget adherence across all individual members."
+          ],
+          "is_provisional": false
+        }
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:13:06.008980+00:00"
+    }
+  ],
+  "status": "ready",
+  "created_at": "2026-10-25T17:13:05.149606+00:00",
+  "updated_at": "2026-10-25T17:13:05.151937+00:00"
+}

@@ -73,6 +73,17 @@ export interface OutfitRecommendation {
   error_message?: string;
 }
 
+export interface HarmonyScoreBreakdown {
+  overall_score: number;
+  palette_harmony: number;
+  formality_consistency: number;
+  budget_compliance: number;
+  category_completeness: number;
+  preference_adherence: number;
+  summary_notes: string[];
+  is_provisional?: boolean;
+}
+
 export interface BlendMember {
   user_id: string;
   display_name: string;
@@ -80,8 +91,13 @@ export interface BlendMember {
   gender: Gender;
   sizes: Record<string, string>;
   personal_style: string;
+  preferred_colors?: string[];
+  avoid_colors?: string[];
+  required_categories?: string[];
   recommended_outfit?: OutfitRecommendation;
-  status: 'joined' | 'generating' | 'ready';
+  status: 'joined' | 'generating' | 'ready' | 'partial' | 'failed';
+  is_valid?: boolean;
+  unresolved_constraints?: string[];
 }
 
 export interface BlendSession {
@@ -94,6 +110,20 @@ export interface BlendSession {
   created_by: string;
   members: BlendMember[];
   group_cohesion_score: number;
+  score_breakdown?: HarmonyScoreBreakdown;
   harmonization_summary: string;
+  trace_steps?: AgentTraceStep[];
+  status?: 'draft' | 'coordinating' | 'ready' | 'partial' | 'failed';
   created_at: string;
+  updated_at?: string;
+}
+
+export interface BlendSwapRequest {
+  blend_id: string;
+  member_id: string;
+  rejected_item_id: string;
+  feedback_text?: string;
+  target_category?: string;
+  preferred_color?: string;
+  max_price_inr?: number;
 }

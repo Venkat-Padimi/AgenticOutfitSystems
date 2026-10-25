@@ -1,0 +1,73 @@
+{
+  "blend_id": "blend_988a0a",
+  "title": "Diwali Celebration Group",
+  "occasion": "Diwali Night",
+  "shared_theme": "Royal Ethnic",
+  "shared_palette": [
+    "Maroon",
+    "Navy",
+    "Gold"
+  ],
+  "event_date": null,
+  "created_by": "Venkat",
+  "members": [
+    {
+      "user_id": "user_host",
+      "display_name": "Venkat",
+      "budget_inr": 8500.0,
+      "gender": "men",
+      "sizes": {
+        "top": "L",
+        "bottom": "34",
+        "footwear": "UK 9"
+      },
+      "personal_style": "Regal Classic",
+      "preferred_colors": [],
+      "avoid_colors": [
+        "Neon Green"
+      ],
+      "required_categories": [
+        "top",
+        "bottom",
+        "footwear"
+      ],
+      "recommended_outfit": null,
+      "status": "joined",
+      "is_valid": true,
+      "unresolved_constraints": []
+    }
+  ],
+  "group_cohesion_score": 0.0,
+  "score_breakdown": {
+    "overall_score": 0.0,
+    "palette_harmony": 0.0,
+    "formality_consistency": 0.0,
+    "budget_compliance": 0.0,
+    "category_completeness": 0.0,
+    "preference_adherence": 0.0,
+    "summary_notes": [
+      "No outfits generated yet. Waiting for coordination."
+    ],
+    "is_provisional": true
+  },
+  "harmonization_summary": "Blend room initialized. Invite friends to coordinate individual styles and budgets.",
+  "trace_steps": [
+    {
+      "step_number": 1,
+      "phase": "UNDERSTAND_GOAL",
+      "thought": "Initialized Blend room 'Diwali Celebration Group' for occasion 'Diwali Night' with shared palette: Maroon, Navy, Gold.",
+      "tool_called": "InitializeBlendRoom",
+      "tool_input": null,
+      "tool_output": {
+        "blend_id": "blend_988a0a",
+        "host": "Venkat",
+        "host_budget": 8500.0
+      },
+      "constraint_check": null,
+      "timestamp": "2026-10-25T17:24:41.387915+00:00"
+    }
+  ],
+  "status": "draft",
+  "created_at": "2026-10-25T17:24:41.387937+00:00",
+  "updated_at": "2026-10-25T17:24:41.387939+00:00"
+}
