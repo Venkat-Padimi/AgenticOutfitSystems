@@ -104,6 +104,14 @@ Unlike conventional recommendation feeds or chatbots, this system features a **d
 ---
 
 ## 5. Security & Sensitive Data Handling
-* **Zero Secret Leakage**: API keys remain strictly server-side in `backend/.env`.
+* **Zero Secret Leakage**: API keys remain strictly server-side in `backend/.env` (excluded via `.gitignore`).
 * **Verified E-Commerce Links**: Buy buttons route users to direct merchant product URLs on Myntra, Amazon India, Ajio, Flipkart, and Zara India.
 * **No Autonomous Payments**: The agent assembles, evaluates, and links to carts; it does not execute financial transactions automatically.
+
+---
+
+## 6. Current Implementation Limitations & Roadmap
+* **Shopping Provider Selection**: Operates on `ControlledFixtureProvider` when `SERPAPI_API_KEY` is omitted, and seamlessly switches to live Google Shopping India when provided.
+* **Orchestrator Logic**: Currently operates via deterministic Python heuristics and structured templates for reproducible benchmarking. Full LLM-driven prompt routing via Gemini 2.5 Flash is structured in the pipeline.
+* **Visual Try-On**: Outfit canvas displays verified merchant product cutouts and styling moodboards; generative neural VTON (virtual try-on) requires dedicated GPU inference.
+
