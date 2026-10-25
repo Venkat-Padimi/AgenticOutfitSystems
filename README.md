@@ -1,6 +1,8 @@
 # AI Personal Outfit Styling & Shopping Agent ("Blend")
 *An Agentic AI Case Study & Mobile Application for Engineering Evaluation*
 
+> 📌 **Engineering Roadmap**: See [`docs/PHASED_ARCHITECTURE_ROADMAP.md`](docs/PHASED_ARCHITECTURE_ROADMAP.md) for the complete 5-phase architectural breakdown, deliverables, and benchmark statuses.
+
 ---
 
 ## 1. System Overview
