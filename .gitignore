@@ -24,6 +24,10 @@ venv/
 env/
 .env/
 backend/data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
 
 # Node & Expo / React Native
 node_modules/

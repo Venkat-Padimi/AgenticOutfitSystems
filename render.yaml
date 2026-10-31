@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: aura-stylist-backend
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: HOST
+        value: 0.0.0.0
+      - key: SHOPPING_PROVIDER_MODE
+        value: hybrid
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash-lite
+      - key: DEBUG
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SERPAPI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: PERSISTENCE_DIR
+        sync: false

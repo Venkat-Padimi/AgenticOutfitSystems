@@ -3,10 +3,9 @@ import { OutfitRecommendation, BlendSession, AgentTraceStep } from '../types';
 
 /**
  * Resolves the backend base URL dynamically:
- * 1. Reads `process.env.EXPO_PUBLIC_API_BASE_URL` if defined.
+ * 1. Reads `process.env.EXPO_PUBLIC_API_BASE_URL` if defined (e.g. production https://... or local LAN IP).
  * 2. On Android emulator: defaults to `http://10.0.2.2:8000` (host loopback alias).
  * 3. On iOS simulator or Web: defaults to `http://localhost:8000`.
- * 4. Physical phones running Expo Go need EXPO_PUBLIC_API_BASE_URL set to host machine LAN IP.
  */
 export function getApiBaseUrl(): string {
   const envUrl = process.env.EXPO_PUBLIC_API_BASE_URL;
@@ -14,8 +13,8 @@ export function getApiBaseUrl(): string {
     return envUrl.trim().replace(/\/+$/, '');
   }
   if (Platform.OS === 'android') {
-    // Default to active computer LAN IP for physical device testing; 10.0.2.2 is only for emulators
-    return 'http://192.168.0.156:8000';
+    // Android emulator loopback alias
+    return 'http://10.0.2.2:8000';
   }
   return 'http://localhost:8000';
 }

@@ -1,3 +1,11 @@
+import sys
+from pathlib import Path
+
+# Ensure backend directory is in sys.path regardless of launch directory
+backend_dir = str(Path(__file__).resolve().parent)
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
@@ -11,12 +19,15 @@ app = FastAPI(
     description="Backend API and Agent Orchestrator for AI Personal Outfit Styling & Shopping Agent ('Blend')"
 )
 
-# Enable CORS for React Native (Expo Go / Web / Emulator)
+# Configure CORS for React Native (Expo Go / Web / Emulator / Production)
+origins = settings.cors_origins
+is_wildcard = "*" in origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=origins,
+    allow_credentials=not is_wildcard,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
 )
 
